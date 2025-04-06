@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Animation</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+    
+        .cart {
+            background-image: url("man1.png");
+            position: absolute;
+            width:500px;
+            transform: translateX(-50%);
+            font-size: 50px;
+            margin-left:700px;
+            margin-top:200px ;
+        }
+        .clothes {
+            position: absolute;
+            top: -50px;
+            font-size: 30px;
+            animation: fall 3s linear forwards;
+        }
+        .money {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 20px;
+            background: yellow;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        @keyframes fall {
+            0% { top: -50px; left: var(--start-pos); }
+            90% { top: 70vh; left: 55%; }
+            100% { top: 80vh; left: 55%; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cart">
+            <img src = "man1.png" alt = "happy" width="500px">
+        </div>
+    </div>
+
+    <script>
+        function createClothing() {
+            const clothingItems = ['👕', '👖', '👗', '🧥'];
+            const clothing = document.createElement('div');
+            clothing.classList.add('clothes');
+            clothing.innerHTML = clothingItems[Math.floor(Math.random() * clothingItems.length)];
+            document.body.appendChild(clothing);
+            let startPos = Math.random() * window.innerWidth;
+            clothing.style.setProperty('--start-pos', startPos + 'px');
+            clothing.style.left = startPos + 'px';
+            clothing.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            setTimeout(() => clothing.remove(), 4000);
+        }
+        setInterval(createClothing, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOCUS SURPLUS | Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@500;700&display=swap');
+        
+        :root {
+            --primary: #FFD700;  /* Gold/Yellow */
+            --secondary: #4169E1; /* Royal Blue */
+            --dark: #121212;     /* Deep Black */
+            --light: #F8F8F8;    /* Off-White */
+            --accent: #E6C229;   /* Soft Gold */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(65, 105, 225, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 20%);
+        }
+        
+        .fabric-texture {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="none" stroke="rgba(255,215,0,0.03)" stroke-width="0.5"/></svg>');
+            background-size: 40px 40px;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        
+        .login-container {
+            width: 380px;
+            background: rgba(18, 18, 18, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transform: translateY(-10%);
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        .brand p {
+            font-weight: 300;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            color: var(--light);
+            opacity: 0.8;
+        }
+        
+        .brand::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 15px auto;
+            opacity: 0.6;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            color: var(--light);
+            opacity: 0.9;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 6px;
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(40, 40, 40, 0.9);
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(248, 248, 248, 0.4);
+            font-weight: 300;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+            accent-color: var(--primary);
+        }
+        
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .forgot-password a:hover {
+            color: var(--accent);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 6px;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(65, 105, 225, 0.4);
+        }
+        
+        .login-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .login-btn:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .signup-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .signup-link a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .social-login p {
+            position: relative;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--light);
+            opacity: 0.8;
+        }
+        
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3));
+        }
+        
+        .social-login p::before {
+            left: 0;
+        }
+        
+        .social-login p::after {
+            right: 0;
+            background: linear-gradient(90deg, rgba(65, 105, 225, 0.3), transparent);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(30, 30, 30, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background: var(--secondary);
+            border-color: var(--primary);
+        }
+        
+        .social-icon i {
+            font-size: 1.1rem;
+            color: var(--light);
+        }
+        
+        /* Fashion elements */
+        .hanger {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            border-radius: 0 0 0 15px;
+            border-right: none;
+            border-top: none;
+            transform: rotate(45deg);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .hanger:nth-child(1) {
+            top: 15%;
+            left: 10%;
+        }
+        
+        .hanger:nth-child(2) {
+            bottom: 20%;
+            right: 10%;
+            transform: rotate(-45deg);
+            border-radius: 0 0 15px 0;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .stitching {
+            position: absolute;
+            height: 100%;
+            width: 1px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 5px,
+                rgba(255, 215, 0, 0.2) 5px,
+                rgba(255, 215, 0, 0.2) 7px
+            );
+            left: 20px;
+            top: 0;
+            z-index: -1;
+        }
+        
+        .stitching.right {
+            left: auto;
+            right: 20px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .login-container {
+                width: 90%;
+                padding: 25px;
+            }
+            
+            .brand h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="fabric-texture"></div>
+    <div class="hanger"></div>
+    <div class="hanger"></div>
+    <div class="stitching"></div>
+    <div class="stitching right"></div>
+    
+    <div class="login-container">
+        <div class="brand">
+            <h1>LOCUS SURPLUS</h1>
+            <p>Curated fashion for the discerning</p>
+        </div>
+        
+        <form>
+            <div class="input-group">
+                <label for="email">EMAIL</label>
+                <input type="email" id="email" placeholder="your@email.com" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="password">PASSWORD</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+            
+            <button type="submit" class="login-btn">SIGN IN</button>
+            
+            <div class="signup-link">
+                <p>New to Locus Surplus? <a href="#">Create an account</a></p>
+            </div>
+            
+            <div class="social-login">
+                <p>OR CONTINUE WITH</p>
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Subtle animation for fabric texture
+        document.addEventListener('DOMContentLoaded', () => {
+            const texture = document.querySelector('.fabric-texture');
+            let pos = 0;
+            
+            const animateTexture = () => {
+                pos = (pos + 0.2) % 40;
+                texture.style.backgroundPosition = `${pos}px ${pos}px`;
+                requestAnimationFrame(animateTexture);
+            };
+            
+            animateTexture();
+            
+            // Add slight glow to inputs on focus
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.style.boxShadow = `0 0 0 2px rgba(65, 105, 225, 0.3)`;
+                });
+                
+                input.addEventListener('blur', () => {
+                    input.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

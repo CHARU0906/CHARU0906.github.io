@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOCAL SURPLUS | Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap');
+
+        :root {
+            --primary: #FCEE21;
+            --secondary: #4A00E0;
+            --dark: #181818; /* Slightly softer dark */
+            --light: #FFFFFF;
+            --accent: #FFD700;
+            --input-bg: rgba(50, 50, 50, 0.8); /* Adjust input bg */
+            /* Slightly less transparent container */
+            --container-bg: rgba(30, 30, 30, 0.9);
+            --input-border: rgba(255, 255, 255, 0.2); /* Slightly more visible border */
+            --input-focus-border: var(--primary);
+            --link-color: var(--primary);
+            --link-hover-color: var(--light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Flatter Header */
+        .bg-header {
+            height: 65px;
+            background-color: var(--primary);
+            width: 100%;
+            flex-shrink: 0;
+            /* Removed shadow for flatter look */
+            /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); */
+            z-index: 10;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+        }
+        .header-logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Noise Texture Background */
+        .main-content {
+            flex-grow: 1;
+            background-color: var(--dark);
+            /* Basic CSS Noise Pattern - Adjust opacity (0.02) as needed */
+            background-image: linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%),
+                              linear-gradient(-45deg, rgba(0,0,0,0.02) 25%, transparent 25%),
+                              linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.02) 75%),
+                              linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.02) 75%);
+            background-size: 2px 2px; /* Size of the noise pixels */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            overflow-y: auto;
+        }
+
+
+        .login-container {
+            width: 400px;
+            background: var(--container-bg);
+            border-radius: 12px; /* More rounded corners */
+            /* Removed border */
+            /* border: 1px solid rgba(255, 255, 255, 0.1); */
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45); /* Adjusted shadow */
+            padding: 45px 40px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px;
+        }
+
+        .login-container::before {
+           content: none;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .brand h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.9rem; /* Slightly larger */
+            color: var(--light);
+            letter-spacing: 1.5px; /* Less spacing */
+            margin-bottom: 10px;
+            font-weight: 600; /* Bolder */
+             text-transform: uppercase;
+             /* Removed underline */
+             /* display: inline-block; */
+             /* padding-bottom: 8px; */
+             /* border-bottom: 2px solid var(--primary); */
+        }
+         /* Add simple yellow accent line below H1 */
+        .brand h1::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            margin: 12px auto 0 auto; /* Space below H1 */
+            border-radius: 2px;
+        }
+
+        .brand p {
+            font-weight: 400; /* Slightly heavier */
+            letter-spacing: 0.4px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 20px; /* More space after accent line */
+        }
+
+        .brand::after {
+            content: none;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.8px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 18px;
+            background: var(--input-bg);
+             border: 1px solid var(--input-border);
+            border-radius: 8px; /* Match container rounding more */
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+             font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--input-focus-border);
+            background: rgba(60, 60, 60, 0.85);
+            box-shadow: 0 0 0 3px rgba(252, 238, 33, 0.2);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5); /* Slightly brighter placeholder */
+            font-weight: 400;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+         .remember-me label {
+             margin-left: 10px;
+             cursor: pointer;
+             color: rgba(255, 255, 255, 0.85); /* Brighter label */
+             font-size: 0.85rem;
+             font-weight: 400;
+         }
+
+        .remember-me input {
+            margin-right: 0;
+            accent-color: var(--primary);
+            transform: scale(1.1);
+            cursor: pointer;
+            background: transparent;
+             border: 1px solid var(--input-border);
+             appearance: none;
+             width: 16px; height: 16px;
+             border-radius: 4px; /* Slightly softer checkbox */
+             position: relative;
+             transition: background-color 0.2s ease;
+        }
+         .remember-me input:checked {
+             background-color: var(--primary);
+             border-color: var(--primary);
+         }
+         .remember-me input:checked::after {
+              content: '\u2713';
+              position: absolute;
+              color: var(--dark);
+              top: -2px; left: 2px;
+              font-size: 0.9em; font-weight: bold;
+         }
+
+
+        .forgot-password a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-weight: 500;
+             font-size: 0.85rem;
+        }
+
+        .forgot-password a:hover {
+            color: var(--link-hover-color);
+        }
+
+        /* Solid Button Style */
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary); /* Solid Yellow */
+             border: none; /* No border needed */
+            border-radius: 8px; /* Match inputs */
+            color: var(--dark); /* Dark text */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem; /* Slightly larger text */
+            font-weight: 600;
+            letter-spacing: 1.2px; /* Less spacing */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+             text-transform: uppercase;
+             margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: var(--accent); /* Gold on hover */
+            color: var(--dark);
+            transform: translateY(-2px);
+             box-shadow: 0 6px 18px rgba(252, 238, 33, 0.25);
+        }
+
+
+        .signup-link {
+            text-align: center;
+            margin-top: 35px;
+            font-size: 0.9rem;
+        }
+
+         .signup-link p {
+            color: rgba(255, 255, 255, 0.7); /* Brighter text */
+             font-weight: 400;
+         }
+
+        .signup-link a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .signup-link a:hover {
+            color: var(--link-hover-color);
+        }
+
+        .social-login {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .social-login p {
+            position: relative;
+            margin-bottom: 30px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6); /* Brighter */
+            text-transform: uppercase;
+             letter-spacing: 1px;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15); /* Slightly more visible */
+        }
+
+        .social-login p::before { left: 5%; }
+        .social-login p::after { right: 5%; }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        /* Slightly more present social icons */
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05); /* Faint background */
+             border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.05);
+             background: var(--primary); /* Fill yellow */
+            border-color: var(--primary);
+        }
+
+        .social-icon i {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8); /* Brighter icons */
+            transition: color 0.3s ease;
+        }
+         .social-icon:hover i {
+             color: var(--dark); /* Dark icon on hover */
+         }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+             .bg-header {
+                 height: 60px;
+                 padding: 0 20px;
+             }
+            .login-container {
+                width: calc(100% - 30px);
+                padding: 40px 25px; /* Adjust padding */
+                 margin: 15px;
+                 border-radius: 10px; /* Less rounded on mobile */
+                 box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            }
+             .brand h1 { font-size: 1.7rem; }
+             .brand h1::after { width: 40px; height: 2px; margin-top: 10px;}
+             .brand p { font-size: 0.9rem; margin-top: 15px;}
+             .input-group input { padding: 14px 15px; font-size: 0.95rem; border-radius: 6px; }
+             .login-btn { padding: 15px; font-size: 0.9rem; border-radius: 6px;}
+             .social-icon { width: 40px; height: 40px; }
+             .options, .remember-me label, .forgot-password a { font-size: 0.8rem; }
+        }
+        @media (max-height: 750px) { /* Adjust breakpoint if needed */
+            .main-content {
+                 align-items: flex-start;
+                 padding-top: 50px; /* More padding top */
+                 padding-bottom: 50px;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="bg-header">
+         <div class="header-logo">Local Surplus</div>
+    </div>
+    <div class="main-content"> 
+
+        <div class="login-container">
+            <div class="brand">
+                <h1>Sign In</h1>
+                <p>Welcome back! Please enter your details.</p>
+            </div>
+
+            <form>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn">Sign In</button>
+
+                <div class="signup-link">
+                    <p>Don't have an account? <a href="#">Sign up</a></p>
+                </div>
+
+                <div class="social-login">
+                    <p>Or continue with</p>
+                    <div class="social-icons">
+                        <div class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div> <script>
+        document.addEventListener('DOMContentLoaded', () => { });
+    </script>
+</body>
+</html>

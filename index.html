@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href = "style.css">
+
+    <title>Local Surplus Page-1</title>
+
+  </head>
+  <body class = "body">
+    <nav class="topnav">
+      <div class="logo">
+          <img src="logo.jpeg" alt="Logo" height="80px"; style="margin-right:20px ;">
+          <span style = "font-family:Comic Sans MS,cursive; margin-right: 270px; ">LOCAL SURPLUS</span>
+          <a href = "index.html">
+            <button class="button" style = "font-family:Comic Sans MS,cursive; font-weight:bold ;margin-right: 20px;">HOME</button>
+          </a>
+          <a href = "PAGE-2.html">
+            <button class="button" style = "font-family:Comic Sans MS,cursive; font-weight:bold ;margin-right: 20px;">ABOUT</button>
+
+          </a>
+          
+          <a href = "Products.html">
+          <button class=" button"; style = "font-family:Comic Sans MS,cursive; font-weight:bold;margin-right: 20px;">MEN</button>
+        </a>
+        <a href = "Women.html">
+          <button class=" button"; style = "font-family:Comic Sans MS,cursive; font-weight:bold;margin-right: 20px;">WOMEN</button>
+        </a>
+        <a href = "children.html">
+          <button class=" button"; style = "font-family:Comic Sans MS,cursive; font-weight:bold;margin-right: 20px;">CHILDREN</button>
+        </a>
+        <a href = "joinus2.html">
+          <button class=" button" style="font-family:Comic Sans MS,cursive; font-weight:bold;margin-right: 20px;">JOIN US</button>
+        </a>
+      </div>
+    </nav>
+    <div>
+      <div class="container">
+        <div class="wrapper">
+          <div class="wrapper-holder">
+            <div id="slider-img-1"></div>
+            <div id="slider-img-2"></div>
+            <div id="slider-img-3"></div>
+            <div id="slider-img-4"></div>
+          </div>
+        </div>
+        <div class="button-holder">
+          <div class="button1 active"></div>
+          <div class="button1"></div>
+          <div class="button1"></div>
+          <div class="button1"></div>
+        </div>
+      </div>
+      <div class = "container">
+        <div class = "wrapper1">
+          <div class = "wrapper-holder">
+            <div id = "s-img-1"></div>
+            <div id = "s-img-2"></div>
+            <div id = "s-img-3"></div>
+            <div id = "s-img-4"></div>
+          </div>
+        </div>
+        <div class = "button-holder">
+          <a href = "#s-img-1" class = "button1"></a>
+          <a href = "#s-img-2" class = "button1"></a>
+          <a href = "#s-img-3" class = "button1"></a>
+          <a href = "#s-img-4" class = "button1"></a>
+        </div>
+      </div>
+      <div class = "container">
+        <div class = "wrapper2">
+          <div class = "wrapper-holder">
+            <div id = "s1"></div>
+            <div id = "s2"></div>
+            <div id = "s3"></div>
+            <div id = "s4"></div>
+          </div>
+        </div>
+        <div class = "button-holder">
+          <a href = "#s1" class = "button1"></a>
+          <a href = "#s2" class = "button1"></a>
+          <a href = "#s3" class = "button1"></a>
+          <a href = "#s4" class = "button1"></a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <img src = "urdrips.png" alt = "GO GET YOUR DRIPS" class="gif"/>
+      </div>
+      <div class="goals-container">
+        <div class="goal1">
+          <img src="sustain.webp" alt="SUSTAINABILITY" width="300px" class="img1" />
+        </div>
+        <div class="goal2">
+          <img src="afford.webp" alt="AFFORDABILITY" width="300px" class="img1" />
+        </div>
+        <div class="goal3">
+          <img src="reuse.webp" alt="HELPING" width="300px" class="img1" />
+        </div>
+        <div class="goal4">
+          <img src="honest.webp" alt="TRANSPARENCY" width="300px" class="img1" />
+        </div>
+      </div>
+      
+        <div class = "arrow left"></div>
+        <div class = "arrow right"></div>
+        <div class="goal">
+          <h1>VISIONS</h1>
+
+        </div>
+        <div class="sus">
+          <h2>1.SUSTAINABILITY</h2>
+        </div>
+        <div class = "sav">
+          <h2>2.SAVINGS</h2>
+        </div>
+        <div class="help">
+          <h2>3.HELPING</h2>
+        </div>
+        <div class="trans">
+          <h2>4.TRANSPARANCY</h2>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+        // Get all sliders
+        const sliders = document.querySelectorAll('.wrapper, .wrapper1, .wrapper2');
+        
+        sliders.forEach((slider, sliderIndex) => {
+          const holder = slider.querySelector('.wrapper-holder');
+          const buttons = slider.parentElement.querySelectorAll('.button-holder .button1');
+          let currentSlide = 0;
+          
+          // Set up button click events
+          buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+              currentSlide = index;
+              updateSlider();
+            });
+          });
+          
+          function updateSlider() {
+            // Apply different transformations based on screen width
+            if (window.innerWidth <= 767) {
+              // Mobile - vertical sliding
+              holder.style.transform = `translateY(-${currentSlide * 100}%)`;
+            } else {
+              // Desktop - horizontal sliding
+              holder.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            
+            // Update active button
+            buttons.forEach((btn, i) => {
+              if (i === currentSlide) {
+                btn.classList.add('active');
+                btn.style.backgroundColor = 'yellow';
+              } else {
+                btn.classList.remove('active');
+                btn.style.backgroundColor = 'white';
+              }
+            });
+          }
+          
+          // Initialize
+          updateSlider();
+          
+          // Make the first button active by default
+          if (buttons.length > 0) {
+            buttons[0].classList.add('active');
+            buttons[0].style.backgroundColor = 'yellow';
+          }
+          
+          // Handle window resize
+          window.addEventListener('resize', updateSlider);
+          
+          // Optional: Auto-slide functionality
+          setInterval(() => {
+            currentSlide = (currentSlide + 1) % 4; // Loop through 4 slides
+            updateSlider();
+          }, 5000); // Change slide every 5 seconds
+        });
+      });
+  
+         
+  
+    </script>  
+
+    
+
+ 
+   
+  </body>
+</html>

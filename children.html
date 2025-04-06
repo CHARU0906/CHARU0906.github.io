@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Animated Premium Carousel</title>
+    <style>
+        html, body {
+            
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Changed from height to min-height */
+            background-image: url("blue.jpg");
+            color: black;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            perspective: 2000px;
+            padding-top: 80px;
+            padding-bottom: 150px; /* Added for explore button space */
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: yellow;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            font-size: 20px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 15px;
+            background-color: yellow;
+            box-shadow: 5px 5px black;
+        }
+
+        .button:hover {
+            box-shadow: 0px 0px 7px 4px rgba(0, 255, 255, 0.6);
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1600px;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 530px; /* Fixed height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden; /* Only restrict horizontal scrolling */
+            overflow-y: visible; /* Allow vertical overflow */
+        }
+
+        .carousel {
+            display: flex;
+            transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
+            position: relative;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 500px;
+            height: 530px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 1);
+            padding: 15px;
+            border-radius: 12px;
+            transform-origin: center;
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+            border: 2px solid cyan;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            background-color: transparent;
+            flex-direction: column;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1 !important;
+        }
+
+        .product-name {
+            position: relative;
+            margin-top: 10px;
+            bottom: 15px;
+            color: gold;
+            text-align: center;
+            width: 100%;
+            font-size: 26px;
+            font-weight: bold;
+            text-shadow: 4px 4px 15px black;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background:black;
+            color:cyan ;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 1000;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #prevBtn {
+            left: 5%;
+        }
+
+        #nextBtn {
+            right: 5%;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .explore-btn-container {
+            position: fixed;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .explore-btn {
+            background-color: cyan;
+            color: black;
+            border: none;
+            padding: 15px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 5px 5px 0px black;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .explore-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px cyan;
+        }
+        
+        .explore-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: black;
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .explore-btn:hover::before {
+            left: 0;
+        }
+        
+        .explore-btn:hover {
+            color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <nav class="topnav">
+        <div class="logo">
+            <img src="logo.jpeg" alt="Logo" height="80px" style="margin-right:20px ;">
+            <div style="font-family:Comic Sans MS,cursive; margin-right: 270px; ">LOCAL SURPLUS</div>
+            <a href = "index.html">
+            <button class="button" style="font-family:Comic Sans MS,cursive; font-weight:bold ;margin-right: 20px;">HOME</button>
+        </a>
+        <a href = "PAGE-2.html">
+            <button class="button" style="font-family:Comic Sans MS,cursive; font-weight:bold ;margin-right: 20px;">ABOUT</button>
+        </a>
+        <a href = "Products.html">
+            <button class="button" style="font-family:Comic Sans MS,cursive; font-weight:bold;margin-right: 20px;">MEN</button>
+        </a>
+        <a href = "Women.html">
+            <button class="button" style="font-family:Comic Sans MS,cursive; font-weight:bold;margin-right: 20px;">WOMEN</button>
+        </a>
+        <a href = "children.html">
+            <button class="button" style="font-family:Comic Sans MS,cursive; font-weight:bold;margin-right: 20px;">CHILDREN</button>
+        </a>
+            <button class=" button" style="font-family:Comic Sans MS,cursive; font-weight:bold;margin-right: 20px;">JOIN US</button>
+        </div>
+    </nav>
+    <div class="carousel-wrapper">
+        <button id="prevBtn" class="nav-btn" onclick="return false;">&#10094;</button>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="clothes.jpg" width="500px" height="530px" />
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="toy.jpg" width="500px" height="530px" />
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="kwer.jpg" width="500px" height="530px" />
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="kglass.jpg" width="500px" height="530px" />
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="winter.jpg" width="500px" height="530px" />
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="bottle.jpg" width="500px" height="530px">
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="cap.jpg" width="500px" height="530px" />
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="ksports.jpg" width="500px" height="530px" />
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="frock.jpg" width="500px" height="530px" />
+                </div>
+                <div class="carousel-item" onclick="event.preventDefault()">
+                    <img src="wools.jpg" width="500px" height="530px" />
+                </div>
+            </div>
+        </div>
+        <button id="nextBtn" class="nav-btn" onclick="return false;">&#10095;</button>
+    </div>
+    <div class="explore-btn-container">
+        <a href = "children1.html">
+        <button class="explore-btn">Explore Collection</button>
+    </a>
+    </div>
+   
+    <script>
+         const scrollContainer = document.querySelector('.carousel-container');
+        if (scrollContainer) {
+            scrollContainer.addEventListener('wheel', (e) => {
+                if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                    e.preventDefault();
+                    scrollContainer.scrollLeft += e.deltaY;
+                }
+                // Vertical scrolling will work naturally
+            });
+        }
+
+        let index = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+
+        function updateCarousel() {
+            items.forEach((item, i) => {
+                let offset = (i - index + totalItems) % totalItems;
+                let angle = offset * 50;
+                let depth = Math.abs(offset) * -500;
+                let scale = 1 - Math.abs(offset) * 0.08;
+                let opacity = Math.abs(offset) > 3 ? 0.2 : 0.8;
+
+                item.style.transform = `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${depth}px) scale(${scale})`;
+                item.style.opacity = opacity;
+
+                if (offset === 0) {
+                    item.style.boxShadow = '0 0 25px rgba(255, 255, 255, 0.7)';
+                    item.style.border = '2px solid white';
+                } else {
+                    item.style.boxShadow = '0 0 12px rgba(255, 255, 255, 0.3)';
+                    item.style.border = '1px solid rgba(255, 255, 255, 0.5)';
+                }
+            });
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            index = (index + 1) % totalItems;
+            updateCarousel();
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            index = (index - 1 + totalItems) % totalItems;
+            updateCarousel();
+        });
+
+        updateCarousel();
+        document.querySelector('.explore-btn').addEventListener('click', function() {
+            // Scroll to the carousel or perform other action
+            document.querySelector('.carousel-wrapper').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+            
+            // Or you can trigger the first carousel item to come forward
+            index = 0;
+            updateCarousel();
+            
+            // Or show a modal with collection details
+            // alert("Explore our premium collection!");
+        });
+    </script>
+</body>
+</html>
